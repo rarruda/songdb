@@ -1,29 +1,10 @@
-<%= form_for(@verse_type) do |f| %>
-  <% if @verse_type.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@verse_type.errors.count, "error") %> prohibited this verse_type from being saved:</h2>
-
-      <ul>
-      <% @verse_type.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :order %><br>
-    <%= f.number_field :order %>
-  </div>
-  <div class="field">
-    <%= f.label :shortcut_key %><br>
-    <%= f.text_field :shortcut_key %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+<%= simple_form_for @verse_type, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :name %>
+  <%= f.input :order %>
+  <%= f.input :shortcut_key %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                verse_types_path, :class => 'btn' %>
   </div>
 <% end %>

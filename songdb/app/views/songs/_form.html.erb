@@ -1,45 +1,14 @@
-<%= form_for(@song) do |f| %>
-  <% if @song.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@song.errors.count, "error") %> prohibited this song from being saved:</h2>
-
-      <ul>
-      <% @song.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :subtitle %><br>
-    <%= f.text_field :subtitle %>
-  </div>
-  <div class="field">
-    <%= f.label :author %><br>
-    <%= f.text_field :author %>
-  </div>
-  <div class="field">
-    <%= f.label :composer %><br>
-    <%= f.text_field :composer %>
-  </div>
-  <div class="field">
-    <%= f.label :translator %><br>
-    <%= f.text_field :translator %>
-  </div>
-  <div class="field">
-    <%= f.label :copyright %><br>
-    <%= f.text_field :copyright %>
-  </div>
-  <div class="field">
-    <%= f.label :note %><br>
-    <%= f.text_field :note %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+<%= simple_form_for @song, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :title %>
+  <%= f.input :subtitle %>
+  <%= f.input :author %>
+  <%= f.input :composer %>
+  <%= f.input :translator %>
+  <%= f.input :copyright %>
+  <%= f.input :note %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                songs_path, :class => 'btn' %>
   </div>
 <% end %>

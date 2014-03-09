@@ -1,35 +1,44 @@
-<h1>Listing verses</h1>
-
-<table>
+<%- model_class = Verse -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Song</th>
-      <th>Order</th>
-      <th>Verse type</th>
-      <th>Note</th>
-      <th>Content</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:song_id) %></th>
+      <th><%= model_class.human_attribute_name(:order) %></th>
+      <th><%= model_class.human_attribute_name(:verse_type_id) %></th>
+      <th><%= model_class.human_attribute_name(:note) %></th>
+      <th><%= model_class.human_attribute_name(:content) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @verses.each do |verse| %>
       <tr>
+        <td><%= link_to verse.id, verse_path(verse) %></td>
         <td><%= verse.song_id %></td>
         <td><%= verse.order %></td>
         <td><%= verse.verse_type_id %></td>
         <td><%= verse.note %></td>
         <td><%= verse.content %></td>
-        <td><%= link_to 'Show', verse %></td>
-        <td><%= link_to 'Edit', edit_verse_path(verse) %></td>
-        <td><%= link_to 'Destroy', verse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l verse.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_verse_path(verse), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      verse_path(verse),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Verse', new_verse_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_verse_path,
+            :class => 'btn btn-primary' %>

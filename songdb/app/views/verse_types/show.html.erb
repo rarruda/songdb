@@ -1,19 +1,25 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = VerseType -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @verse_type.name %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @verse_type.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:order) %>:</strong></dt>
+  <dd><%= @verse_type.order %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:shortcut_key) %>:</strong></dt>
+  <dd><%= @verse_type.shortcut_key %></dd>
+</dl>
 
-<p>
-  <strong>Order:</strong>
-  <%= @verse_type.order %>
-</p>
-
-<p>
-  <strong>Shortcut key:</strong>
-  <%= @verse_type.shortcut_key %>
-</p>
-
-<%= link_to 'Edit', edit_verse_type_path(@verse_type) %> |
-<%= link_to 'Back', verse_types_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              verse_types_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_verse_type_path(@verse_type), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              verse_type_path(@verse_type),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
