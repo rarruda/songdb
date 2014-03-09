@@ -21,7 +21,7 @@
         <td><%= link_to verse.id, verse_path(verse) %></td>
         <td><%= verse.song_id %></td>
         <td><%= verse.order %></td>
-        <td><%= verse.verse_type_id %></td>
+        <td><%= verse.verse_type.name %></td>
         <td><%= verse.note %></td>
         <td><%= verse.content %></td>
         <td><%=l verse.created_at %></td>

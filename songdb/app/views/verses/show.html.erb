@@ -9,7 +9,7 @@
   <dt><strong><%= model_class.human_attribute_name(:order) %>:</strong></dt>
   <dd><%= @verse.order %></dd>
   <dt><strong><%= model_class.human_attribute_name(:verse_type_id) %>:</strong></dt>
-  <dd><%= @verse.verse_type_id %></dd>
+  <dd><%= @verse.verse_type.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:note) %>:</strong></dt>
   <dd><%= @verse.note %></dd>
   <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
