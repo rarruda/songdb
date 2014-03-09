@@ -1,4 +1,10 @@
 Songdb::Application.routes.draw do
+  resources :verse_types
+
+  resources :verses
+
+  resources :songs
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

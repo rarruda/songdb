@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Song:</strong>
+  <%= @verse.song_id %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @verse.order %>
+</p>
+
+<p>
+  <strong>Verse type:</strong>
+  <%= @verse.verse_type_id %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @verse.note %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @verse.content %>
+</p>
+
+<%= link_to 'Edit', edit_verse_path(@verse) %> |
+<%= link_to 'Back', verses_path %>

@@ -1,0 +1,31 @@
+<h1>Listing verse_types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Order</th>
+      <th>Shortcut key</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @verse_types.each do |verse_type| %>
+      <tr>
+        <td><%= verse_type.name %></td>
+        <td><%= verse_type.order %></td>
+        <td><%= verse_type.shortcut_key %></td>
+        <td><%= link_to 'Show', verse_type %></td>
+        <td><%= link_to 'Edit', edit_verse_type_path(verse_type) %></td>
+        <td><%= link_to 'Destroy', verse_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Verse type', new_verse_type_path %>

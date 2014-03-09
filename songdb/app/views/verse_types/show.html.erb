@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @verse_type.name %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @verse_type.order %>
+</p>
+
+<p>
+  <strong>Shortcut key:</strong>
+  <%= @verse_type.shortcut_key %>
+</p>
+
+<%= link_to 'Edit', edit_verse_type_path(@verse_type) %> |
+<%= link_to 'Back', verse_types_path %>
