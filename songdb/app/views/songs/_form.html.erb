@@ -1,5 +1,6 @@
 <%= simple_form_for @song, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :title, :placeholder => t("songs.fill_in_title")  %>
+  <%= f.association :language, :include_blank => t('.select_language') %>
   <%= f.input :subtitle %>
   <%= f.input :author %>
   <%= f.input :composer %>
