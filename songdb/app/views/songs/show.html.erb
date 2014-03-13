@@ -5,19 +5,24 @@
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @song.title %></dd>
+  <dd><%= @song.title %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:subtitle) %>:</strong></dt>
-  <dd><%= @song.subtitle %></dd>
+  <dd><%= @song.subtitle %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:author) %>:</strong></dt>
-  <dd><%= @song.author %></dd>
+  <dd><%= @song.author %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:composer) %>:</strong></dt>
-  <dd><%= @song.composer %></dd>
+  <dd><%= @song.composer %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:translator) %>:</strong></dt>
-  <dd><%= @song.translator %></dd>
+  <dd><%= @song.translator %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:copyright) %>:</strong></dt>
-  <dd><%= @song.copyright %></dd>
+  <dd><%= @song.copyright %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:note) %>:</strong></dt>
-  <dd><%= @song.note %></dd>
+  <dd><%= @song.note %>&nbsp;</dd>
+  <% @song.verses.each do |verse| %>
+  <dt><strong><%= verse.verse_type.name %>:</strong></dt>
+  <dd><%= simple_format(verse.content) %></dd>
+  <% end %>
+
 </dl>
 
 <div class="form-actions">
