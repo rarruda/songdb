@@ -21,3 +21,8 @@
 
 en:
   hello: "Hello world"
+  songs:
+    fill_in_title: "Fill in the song title here..."
+  verses:
+    select_verse_type: "Please select a verse type"
+
