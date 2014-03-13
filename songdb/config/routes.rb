@@ -1,7 +1,8 @@
 Songdb::Application.routes.draw do
-  resources :languages
-
-  resources :verse_types
+  scope '/admin' do
+    resources :languages
+    resources :verse_types
+  end
 
   resources :songs do
     resources :verses
