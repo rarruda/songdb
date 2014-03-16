@@ -1,4 +1,4 @@
-<%= simple_form_for @song, :html => { :class => 'form-horizontal' } do |f| %>
+<%= simple_form_for @song, :html => { :class => 'form-horizontal table-condensed' } do |f| %>
   <%= f.input :title, :placeholder => t("songs.fill_in_title")  %>
   <%= f.association :language, :include_blank => t('.select_language') %>
   <%= f.input :subtitle %>
@@ -7,6 +7,18 @@
   <%= f.input :translator %>
   <%= f.input :copyright %>
   <%= f.input :note %>
+  <%= f.simple_fields_for :verses do |builder| %>
+    <div class="verse table-bordered">
+    <%#= builder.input :order %>
+    <%= builder.association :verse_type, :include_blank => t('.select_verse_type') %>
+    <%= builder.input :content, as: :text , :input_html => { :cols => 80, :rows => 8 }  %>
+      <!--div class="control-group controls" -->
+        <%= builder.hidden_field :_destroy  %>
+        <%= link_to "remove", '#', :class => 'remove-verse btn btn-mini btn-danger ' %>
+      <!--/div-->
+    </div>
+  <% end %>
+  <%#= link_to_add_verses "Add Verses", f, :verses %>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
