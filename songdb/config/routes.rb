@@ -4,6 +4,9 @@ Songdb::Application.routes.draw do
     resources :verse_types
   end
 
+  # temporary, useful during testing:
+  resources :verses
+
   resources :songs do
     resources :verses
   end
