@@ -7,7 +7,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:song_id) %></th>
-      <th><%= model_class.human_attribute_name(:order) %></th>
+      <th><%= model_class.human_attribute_name(:position) %></th>
       <th><%= model_class.human_attribute_name(:verse_type_id) %></th>
       <th><%= model_class.human_attribute_name(:note) %></th>
       <th><%= model_class.human_attribute_name(:content) %></th>
@@ -20,7 +20,7 @@
       <tr>
         <td><%= link_to verse.id, verse_path(verse) %></td>
         <td><%= verse.song_id %></td>
-        <td><%= verse.order %></td>
+        <td><%= verse.position %></td>
         <td><%= verse.verse_type.name %></td>
         <td><%= verse.note %></td>
         <td><%= verse.content %></td>

@@ -69,6 +69,6 @@ class VerseTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def verse_type_params
-      params.require(:verse_type).permit(:name, :order, :shortcut_key)
+      params.require(:verse_type).permit(:name, :position, :shortcut_key)
     end
 end

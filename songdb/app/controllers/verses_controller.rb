@@ -69,6 +69,6 @@ class VersesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def verse_params
-      params.require(:verse).permit(:song_id, :order, :verse_type_id, :note, :content)
+      params.require(:verse).permit(:song_id, :position, :verse_type_id, :note, :content)
     end
 end
