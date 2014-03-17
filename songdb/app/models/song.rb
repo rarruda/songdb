@@ -1,5 +1,5 @@
 class Song < ActiveRecord::Base
-	has_many :verses, :dependent => :destroy
+	has_many :verses, :dependent => :destroy, order: 'position ASC'
 	belongs_to :language
 
 	validates :title, :presence => true
