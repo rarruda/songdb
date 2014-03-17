@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140313224811) do
+ActiveRecord::Schema.define(version: 20140317204215) do
 
   create_table "languages", force: true do |t|
     t.string   "name"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20140313224811) do
 
   create_table "verse_types", force: true do |t|
     t.string   "name"
-    t.integer  "order"
+    t.integer  "position"
     t.string   "shortcut_key"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20140313224811) do
 
   create_table "verses", force: true do |t|
     t.integer  "song_id"
-    t.integer  "order"
+    t.integer  "position"
     t.integer  "verse_type_id"
     t.string   "note"
     t.text     "content"
