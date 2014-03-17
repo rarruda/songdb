@@ -11,3 +11,7 @@
  *= require_self
  *= require_tree .
  */
+
+.verse {
+  background-color: white;
+}

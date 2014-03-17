@@ -11,3 +11,14 @@ $(document).ready(function(){
 	});
 });
 `
+
+`
+$(document).ready(function() {
+  $('#verses').sortable({
+    items:'.sortable',
+    //axis:'y',
+    //handle: '.handle',
+    //cursor: 'move',
+  });
+});
+`

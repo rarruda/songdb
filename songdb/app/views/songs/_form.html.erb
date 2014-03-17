@@ -7,17 +7,18 @@
   <%= f.input :translator %>
   <%= f.input :copyright %>
   <%= f.input :note %>
+  <div id="verses">
   <%= f.simple_fields_for :verses do |builder| %>
-    <div class="verse table-bordered">
+    <div class="verse sortable duplicatable_nested_form table table-hover table-bordered">
     <%#= builder.input :order %>
     <%= builder.association :verse_type, :include_blank => t('.select_verse_type') %>
     <%= builder.input :content, as: :text , :input_html => { :cols => 80, :rows => 8 }  %>
-      <!--div class="control-group controls" -->
-        <%= builder.hidden_field :_destroy  %>
-        <%= link_to "remove", '#', :class => 'remove-verse btn btn-mini btn-danger ' %>
-      <!--/div-->
+      <%= builder.hidden_field :_destroy  %>
+      <%= link_to "remove", '', :class => 'remove-verse btn btn-mini btn-danger ' %>
+      <%#= builder.input :id, as: :hidden %>
     </div>
   <% end %>
+  </div>
   <%#= link_to_add_verses "Add Verses", f, :verses %>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
