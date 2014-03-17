@@ -10,9 +10,9 @@
   <div id="verses">
   <%= f.simple_fields_for :verses do |builder| %>
     <div class="verse sortable duplicatable_nested_form table table-hover table-bordered">
-    <%#= builder.input :order %>
     <%= builder.association :verse_type, :include_blank => t('.select_verse_type') %>
     <%= builder.input :content, as: :text , :input_html => { :cols => 80, :rows => 8 }  %>
+      <%= builder.hidden_field :position, :class => 'position' %>
       <%= builder.hidden_field :_destroy  %>
       <%= link_to "remove", '', :class => 'remove-verse btn btn-mini btn-danger ' %>
       <%#= builder.input :id, as: :hidden %>

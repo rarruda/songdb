@@ -9,16 +9,22 @@ $(document).ready(function(){
 	  $(this).parent().hide();
 	  event.preventDefault();
 	});
-});
-`
 
-`
-$(document).ready(function() {
-  $('#verses').sortable({
-    items:'.sortable',
-    //axis:'y',
-    //handle: '.handle',
-    //cursor: 'move',
-  });
+	$('#verses').sortable({
+	  items:'.sortable',
+	  revert: 40,
+	  //handle: '.handle',
+	  //cursor: 'move',
+	  cursor: 'crosshair',
+	  opacity: 0.6,
+	  stop: function () {
+	    var inputs = $('input[type=hidden].position');
+	    $('input.position').each(function(idx) {
+	      $(this).val(idx + 1);
+	    });
+	  }
+	});
+
+
 });
 `
