@@ -1,0 +1,33 @@
+<%- model_class = Song -%>
+<div class="page-header">
+  <h1><%= @song.title %> </h1>
+</div>
+
+<% if ! @song.subtitle.empty? %>
+  <h2><%= @song.subtitle %></h2>
+<% end %>
+
+<h3>
+  <% if ! @song.author.empty? %>
+  <%= t '.author'  %>: <%= @song.author %>
+  <% end %>
+  <% if ! @song.composer.empty? %>
+  <%= t '.composer'  %>: <%= @song.composer %>
+  <% end %>
+  <% if ! @song.translator.empty? %>
+  <%= t '.translator'  %>: <%= @song.translator %>
+  <% end %>
+</h3>
+
+<% @song.verses.each do |verse| %>
+  <h3><strong><%= verse.verse_type.name %>:</strong></h3>
+  <p><%= simple_format(verse.content) %></p> <br />
+<% end %>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              songs_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_song_path(@song), :class => 'btn' %>
+
+</div>

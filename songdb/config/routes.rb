@@ -9,6 +9,9 @@ Songdb::Application.routes.draw do
 
   resources :songs do
     resources :verses
+    member do
+      get 'slide'
+    end
   end
 
   root 'songs#search'
