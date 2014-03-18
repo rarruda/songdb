@@ -7,7 +7,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:order) %></th>
+      <th><%= model_class.human_attribute_name(:position) %></th>
       <th><%= model_class.human_attribute_name(:shortcut_key) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -18,7 +18,7 @@
       <tr>
         <td><%= link_to verse_type.id, verse_type_path(verse_type) %></td>
         <td><%= verse_type.name %></td>
-        <td><%= verse_type.order %></td>
+        <td><%= verse_type.position %></td>
         <td><%= verse_type.shortcut_key %></td>
         <td><%=l verse_type.created_at %></td>
         <td>
