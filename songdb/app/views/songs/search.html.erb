@@ -36,6 +36,9 @@
           <%= link_to t('.slide', :default => t("helpers.links.slide")),
                       slide_song_path( song ),
                       :class => 'btn btn-mini btn-info' %>
+          <%= link_to t('.pro4', :default => t("helpers.links.pro4")),
+                      slide_song_path( song, 'xml' ),
+                      :class => 'btn btn-mini btn-info' %>
         </td>
       </tr>
     <% end %>

@@ -1,5 +1,6 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json, :xml
 
   # GET /songs
   # GET /songs.json
@@ -14,6 +15,10 @@ class SongsController < ApplicationController
   # GET /songs/1/slide
   def slide
     @song = Song.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.xml
+    end
   end
 
   # GET /songs/1
