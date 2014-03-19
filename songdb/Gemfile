@@ -26,7 +26,7 @@ gem 'less-rails'
 gem 'simple_form'
 gem 'twitter-bootstrap-rails'
 gem 'jquery-ui-rails', '~> 4.2.0'
-#gem 'acts_as_list'
+gem 'jquery-turbolinks'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
