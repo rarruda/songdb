@@ -15,11 +15,12 @@
       <%= builder.hidden_field :position, :class => 'position' %>
       <%= builder.hidden_field :_destroy, :class => '_destroy'  %>
       <i class="icon-move"> move</i>
-      <%= link_to "remove", '', :class => 'remove-verse btn btn-mini btn-danger ' %>
+      <%= link_to t('.remove'), '', :class => 'remove-verse btn btn-mini btn-danger ' %>
     </div>
   <% end %>
+  <%= link_to t('.add_verse'), '', :class => 'duplicate_nested_form btn btn-primary' %>
   </div>
-  <%#= link_to_add_verses "Add Verses", f, :verses %>
+
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

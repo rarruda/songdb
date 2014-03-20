@@ -2,10 +2,14 @@ Songdb::Application.routes.draw do
   scope '/admin' do
     resources :languages
     resources :verse_types
+
+    # to be removed at a later point //
+    # temporary, useful during testing:
+
+    resources :verses
+
   end
 
-  # temporary, useful during testing:
-  resources :verses
 
   resources :songs do
     resources :verses
