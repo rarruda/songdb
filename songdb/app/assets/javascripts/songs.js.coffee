@@ -5,7 +5,7 @@
 `
 $(document).ready(function(){
 	$(".remove-verse").click(function(){
-	  $('input[type=hidden]._destroy').val("1");
+	  $(this).prevAll().filter("input[type=hidden]").filter("._destroy").val("1");
 	  $(this).parent().hide();
 	  event.preventDefault();
 	});
