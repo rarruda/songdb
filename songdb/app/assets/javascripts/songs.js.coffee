@@ -14,8 +14,7 @@ $(document).ready(function(){
 	  items:'.sortable',
 	  revert: 40,
 	  //handle: '.handle',
-	  //cursor: 'move',
-	  cursor: 'crosshair',
+	  cursor: 'move',
 	  opacity: 0.6,
 	  stop: function () {
 	    var inputs = $('input[type=hidden].position');
@@ -24,8 +23,6 @@ $(document).ready(function(){
 	    });
 	  }
 	});
-
-
 });
 `
 
