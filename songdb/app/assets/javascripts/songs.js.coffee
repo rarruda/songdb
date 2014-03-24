@@ -52,7 +52,10 @@ jQuery ($) ->
           newName = oldName.replace(new RegExp(/\[[0-9]+\]/), "[#{formsOnPage}]")
           $(this).attr 'name', newName
 
-        $( newNestedForm ).insertAfter( lastNestedForm )
+        $(newNestedForm).find('select, textarea').each ->
+          $(this).val('')
+
+        $(newNestedForm ).insertAfter( lastNestedForm )
 
 
 
