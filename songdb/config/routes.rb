@@ -12,6 +12,7 @@ Songdb::Application.routes.draw do
 
 
   resources :songs do
+    get 'page/:page', :action => :index, :on => :collection
     resources :verses
     member do
       get 'slide'
@@ -19,6 +20,9 @@ Songdb::Application.routes.draw do
   end
 
   root 'songs#search'
+
+  get 'page/:page' => 'songs#search'
+  get 'search' => 'songs#search'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -24,6 +24,8 @@ en:
   songs:
     fill_in_title: "Fill in the song title here..."
     select_languange: "Please select a languange"
+    form:
+      remove: "Remove"
   verses:
     select_verse_type: "Please select a verse type"
 

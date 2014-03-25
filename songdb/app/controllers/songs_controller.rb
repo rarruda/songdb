@@ -9,7 +9,19 @@ class SongsController < ApplicationController
   end
 
   def search
-    @songs = Song.all
+
+    if params[:page].nil? or params[:page].empty?
+      page = 1
+    else
+      page = params[:page]
+    end
+
+    if params[:q].nil?
+      #@songs = Song.all
+      @songs = Song.order(:id).page(page).per(5)
+    else
+      @songs = Song.where( 'title LIKE ? OR subtitle LIKE ?', "%#{params[:q]}%", "%#{params[:q]}%" ).page(page).per(5)
+    end
   end
 
   # GET /songs/1/slide
@@ -29,10 +41,15 @@ class SongsController < ApplicationController
   # GET /songs/new
   def new
     @song = Song.new
+    @song.verses.build
   end
 
   # GET /songs/1/edit
   def edit
+    @song = Song.find(params[:id])
+    if @song.verses.empty?
+      @song.verses.build
+    end
   end
 
   # POST /songs
