@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
-  respond_to :html, :json, :xml
+  respond_to :html, :json, :xml, :pro4, :pro5
 
   # GET /songs
   # GET /songs.json
@@ -30,6 +30,8 @@ class SongsController < ApplicationController
     respond_to do |format|
       format.html
       format.xml
+      format.pro4 { render :action => "slide.pro4.xml.builder" }
+      format.pro5 { render :action => "slide.pro5.xml.builder" }
     end
   end
 
