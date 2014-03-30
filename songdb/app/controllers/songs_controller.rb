@@ -74,7 +74,18 @@ class SongsController < ApplicationController
   # PATCH/PUT /songs/1.json
   def update
     respond_to do |format|
-      if @song.update(song_params)
+      # if a pro presenter 4 file is uploaded:
+      if not params[:song][:pro4_file].nil?
+        uploaded_io = params[:song][:pro4_file]
+        doc = Nokogiri::XML( uploaded_io.read )
+        xml_verses = doc.xpath('RVPresentationDocument/slides/RVDisplaySlide/displayElements/RVTextElement')
+        @verses_from_xml = []
+        xml_verses.each { |e|
+          @verses_from_xml << rtf_plain( Base64.strict_decode64( e['RTFData'] ) )
+        }
+
+        format.html { render action: 'edit' }
+      elsif @song.update(song_params)
         format.html { redirect_to @song, notice: 'Song was successfully updated.' }
         format.json { head :no_content }
       else
@@ -104,5 +115,9 @@ class SongsController < ApplicationController
     def song_params
       params.require(:song).permit(:title, :subtitle, :author, :composer, :translator, :copyright, :note, :language_id,
         verses_attributes: [ :id, :position, :verse_type_id, :content, :_destroy ] )
+    end
+
+    def rtf_plain(rtf_str)
+      return rtf_str.gsub(/{?\\[a-zA-Z]{1,32}[0-9A-Za-z;]{0,4}*}?/,'').gsub(/\w+;}/,'').sub(/}$/,'').strip
     end
 end

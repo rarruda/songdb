@@ -1,29 +1,32 @@
-<%= simple_form_for @song, :html => { :class => 'form-horizontal table-condensed' } do |f| %>
-  <%= f.input :title, :placeholder => t("songs.fill_in_title")  %>
-  <%= f.association :language, :include_blank => t('.select_language') %>
-  <%= f.input :subtitle %>
-  <%= f.input :author %>
-  <%= f.input :composer %>
-  <%= f.input :translator %>
-  <%= f.input :copyright %>
-  <%= f.input :note %>
-  <div id="verses">
-  <%= f.simple_fields_for :verses do |builder| %>
-    <div class="verse sortable duplicatable_nested_form table table-hover table-bordered">
-      <%= builder.association :verse_type, :include_blank => t('.select_verse_type') %>
-      <%= builder.input :content, as: :text , :input_html => { :cols => 80, :rows => 8, :class => 'span4' }  %>
-      <%= builder.hidden_field :position, :class => 'position' %>
-      <%= builder.hidden_field :_destroy, :class => '_destroy' %><%# order is important! should be right before remove button. %>
-      <i class="icon-move"> move</i>
-      <%= link_to t('.remove'), '#', :class => 'remove-verse btn btn-mini btn-danger ' %>
-    </div>
-  <% end %>
-  <%= link_to t('.add_verse'), '', :class => 'duplicate_nested_form btn btn-primary' %>
+<div class="container">
+  <div class="row">
+  <div id="verses" class="span8">
+    <%= simple_form_for @song, :html => { :class => 'form-horizontal table-condensed' } do |f| %>
+      <%= f.input :title, :placeholder => t("songs.fill_in_title")  %>
+      <%= f.association :language, :include_blank => t('.select_language') %>
+      <%= f.input :subtitle %>
+      <%= f.input :author %>
+      <%= f.input :composer %>
+      <%= f.input :translator %>
+      <%= f.input :copyright %>
+      <%= f.input :note %>
+      <%= f.simple_fields_for :verses do |builder| %>
+      <div class="verse sortable duplicatable_nested_form table table-hover table-bordered">
+        <%= builder.association :verse_type, :include_blank => t('.select_verse_type') %>
+        <%= builder.input :content, as: :text , :input_html => { :cols => 80, :rows => 8, :class => 'span6' }  %>
+        <%= builder.hidden_field :position, :class => 'position' %>
+        <%= builder.hidden_field :_destroy, :class => '_destroy' %><%# order is important! should be right before remove button. %>
+        <i class="icon-move"> move</i>
+        <%= link_to t('.remove'), '#', :class => 'remove-verse btn btn-mini btn-danger ' %>
+      </div>
+      <% end %>
+      <%= link_to t('.add_verse'), '', :class => 'duplicate_nested_form btn btn-primary' %>
+      <div class="form-actions">
+        <%= f.button :submit, :class => 'btn-primary' %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                    songs_path, :class => 'btn' %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, :class => 'btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                songs_path, :class => 'btn' %>
-  </div>
-<% end %>
+  <%= render "songs/verses_from_xml" %>
+</div>

@@ -1,0 +1,24 @@
+<div class="span4">
+  <div class="pull-right">
+    Compare with existing Propresenter file:
+    <%= form_for @song do |f| %>
+      <%= f.file_field :pro4_file %>
+      <%= f.button :submit, :class => 'btn-primary' %>
+    <% end %>
+  </div>
+
+  <% if not @verses_from_xml.nil? %>
+  <div class="pull-right">
+    <% @verses_from_xml.each.with_index(1) do |v, idx| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Slide <%= idx %></h3>
+        </div>
+        <div class="panel-body">
+          <pre> <%= v %> </pre>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% end %>
+</div>
