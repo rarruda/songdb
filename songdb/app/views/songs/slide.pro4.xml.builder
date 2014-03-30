@@ -2,7 +2,8 @@
 # TODO:
 # - ensure hotKeys are unique.
 # - colors (highlightColor) for diferent slide types
-# - breaking slides
+# - somehow the slides are getting imported in reverse order, even if written in the correct order.
+# - Check for utf8 formatting, see: https://github.com/danthedeckie/OpenLP-To-ProPresenter5-Converter/blob/master/converter.py#L116
 
 rtf_magic_string_pre = '{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
 {\fonttbl\f0\fnil\fcharset0 FeSaCondStdDemi;}
@@ -33,10 +34,10 @@ xml.RVPresentationDocument( "height"=>"768", "width"=>"1024", "versionNumber"=>"
       xml.cues("containerClass"=>"NSMutableArray")
       xml.displayElements("containerClass"=>"NSMutableArray"){
       	xml.RVTextElement( "displayDelay"=>"0", "displayName"=>"", "locked"=>"0", "persistent"=>"0",
-      	    "typeID"=>"0", "fromTemplate"=>"0", "bezelRadius"=>"0", "drawingFill"=>"0",
-      	    "drawingShadow"=>"1", "drawingStroke"=>"0", "fillColor"=>"1 1 1 1", "rotation"=>"0",
-      	    "source"=>"", "adjustsHeightToFit"=>"0", "verticalAlignment"=>"0",
-            "RTFData"=> Base64.strict_encode64( rtf_magic_string_pre + verse.content.sub(/\r\n?/,'\uc0\u8232 ').gsub(/\r\n?/,'\u8232 ').encode('Windows-1252') + rtf_magic_string_post ),
+            "typeID"=>"0", "fromTemplate"=>"0", "bezelRadius"=>"0", "drawingFill"=>"0",
+            "drawingShadow"=>"1", "drawingStroke"=>"0", "fillColor"=>"1 1 1 1", "rotation"=>"0",
+            "source"=>"", "adjustsHeightToFit"=>"0", "verticalAlignment"=>"0",
+            "RTFData"=> Base64.strict_encode64( rtf_magic_string_pre + verse.content.sub(/\r\n?/,'\uc0\u8232 ').gsub(/\r\n?/,'\u8232 ') + rtf_magic_string_post ),
       	    "serialization-array-index"=>"0") {
           xml.tag! "_-RVRect3D-_position", "x"=>"13.7926", "y"=>"7.264877", "z"=>"0", "width"=>"996.4149", "height"=>"753.4703"
           xml.tag! "_-D-_serializedShadow", "containerClass"=>"NSMutableDictionary" do
