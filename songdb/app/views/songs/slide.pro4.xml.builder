@@ -37,7 +37,7 @@ xml.RVPresentationDocument( "height"=>"768", "width"=>"1024", "versionNumber"=>"
             "typeID"=>"0", "fromTemplate"=>"0", "bezelRadius"=>"0", "drawingFill"=>"0",
             "drawingShadow"=>"1", "drawingStroke"=>"0", "fillColor"=>"1 1 1 1", "rotation"=>"0",
             "source"=>"", "adjustsHeightToFit"=>"0", "verticalAlignment"=>"0",
-            "RTFData"=> Base64.strict_encode64( rtf_magic_string_pre + verse.content.sub(/\r\n?/,'\uc0\u8232 ').gsub(/\r\n?/,'\u8232 ') + rtf_magic_string_post ),
+            "RTFData"=> Base64.strict_encode64( rtf_magic_string_pre + plain_to_rtf( verse.content ) + rtf_magic_string_post ),
       	    "serialization-array-index"=>"0") {
           xml.tag! "_-RVRect3D-_position", "x"=>"13.7926", "y"=>"7.264877", "z"=>"0", "width"=>"996.4149", "height"=>"753.4703"
           xml.tag! "_-D-_serializedShadow", "containerClass"=>"NSMutableDictionary" do

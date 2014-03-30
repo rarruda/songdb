@@ -2,6 +2,8 @@ class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
   respond_to :html, :json, :xml, :pro4, :pro5
 
+  helper_method :plain_to_rtf
+
   # GET /songs
   # GET /songs.json
   def index
@@ -81,7 +83,7 @@ class SongsController < ApplicationController
         xml_verses = doc.xpath('RVPresentationDocument/slides/RVDisplaySlide/displayElements/RVTextElement')
         @verses_from_xml = []
         xml_verses.each { |e|
-          @verses_from_xml << rtf_plain( Base64.strict_decode64( e['RTFData'] ) )
+          @verses_from_xml << rtf_to_plain( Base64.strict_decode64( e['RTFData'] ) )
         }
 
         format.html { render action: 'edit' }
@@ -117,7 +119,23 @@ class SongsController < ApplicationController
         verses_attributes: [ :id, :position, :verse_type_id, :content, :_destroy ] )
     end
 
-    def rtf_plain(rtf_str)
-      return rtf_str.gsub(/{?\\[a-zA-Z]{1,32}[0-9A-Za-z;]{0,4}*}?/,'').gsub(/\w+;}/,'').sub(/}$/,'').strip
+    # This is super magic suff. I just let the RubyRTF do the heavy lifting of parsing the data.
+    #  Note: propresenter uses Windows-1252 encoding internally. :/
+    def rtf_to_plain(rtf_str)
+      plain_str = ""
+      doc = RubyRTF::Parser.new.parse( rtf_str )
+      doc.sections.each do |section|
+        plain_str << section[:text].encode('UTF-8','Windows-1252')
+      end
+      return plain_str
+    end
+
+    # Here we do the encoding reverse magic. from UTF8 to Windows-1252 to RTF (*shivers*)
+    def plain_to_rtf(plain_str)
+      #_text = @text || ''
+      #rtf_str = plain_str.gsub("\\", "\\\\\\").gsub("{", "\\{").gsub("}", "\\}")
+      #rtf_str.unpack('U*').map { |n| n < 128 ? n.chr : n < 256 ? "\\'#{n.to_s(16)}" : "\\u#{n}\\'3f" }.join('')
+      rtf_str = plain_str.sub(/\r\n?/,'\uc0\u8232 ').gsub(/\r\n?/,'\u8232 ')
+      return rtf_str
     end
 end

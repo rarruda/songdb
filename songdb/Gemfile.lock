@@ -91,6 +91,7 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     ref (1.0.5)
+    ruby-rtf (0.0.1)
     sass (3.3.0)
       rake
     sass-rails (4.0.1)
@@ -148,6 +149,7 @@ DEPENDENCIES
   less-rails
   nokogiri
   rails (= 4.0.3)
+  ruby-rtf
   sass-rails (~> 4.0.0)
   sdoc
   simple_form
