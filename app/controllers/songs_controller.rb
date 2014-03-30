@@ -130,12 +130,14 @@ class SongsController < ApplicationController
       return plain_str
     end
 
-    # Here we do the encoding reverse magic. from UTF8 to Windows-1252 to RTF (*shivers*)
+    # Here we do the encoding reverse magic. from UTF8 to RTF (*shivers*)
     def plain_to_rtf(plain_str)
-      #_text = @text || ''
+      ## Escape escapes:
       #rtf_str = plain_str.gsub("\\", "\\\\\\").gsub("{", "\\{").gsub("}", "\\}")
-      #rtf_str.unpack('U*').map { |n| n < 128 ? n.chr : n < 256 ? "\\'#{n.to_s(16)}" : "\\u#{n}\\'3f" }.join('')
+      # Newlines:
       rtf_str = plain_str.sub(/\r\n?/,'\uc0\u8232 ').gsub(/\r\n?/,'\u8232 ')
+      # UTF-8 to RTF encoding:
+      rtf_str = rtf_str.unpack('U*').map { |n| n < 128 ? n.chr : n < 256 ? "\\'#{n.to_s(16)}" : "\\u#{n}\\'3f" }.join('')
       return rtf_str
     end
 end
