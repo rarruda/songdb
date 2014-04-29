@@ -16,9 +16,10 @@ class SongsController < ApplicationController
     if params[:q].nil? and params[:l].nil?
       @songs = Song.order(:id).page(page).per(5)
     elsif params[:l].nil?
-      @songs = Song.where( 'title LIKE ? OR subtitle LIKE ?', "%#{params[:q]}%", "%#{params[:q]}%" ).page(page).per(5)
+      # non-scalable case insensitive sql search:
+      @songs = Song.where( 'LOWER(title) LIKE LOWER(?) OR LOWER(subtitle) LIKE LOWER(?)', "%#{params[:q]}%", "%#{params[:q]}%" ).page(page).per(5)
     elsif params[:q].nil?
-      @songs = Song.where( 'title LIKE ?', "#{params[:l]}%" ).page(page).per(5)
+      @songs = Song.where( 'LOWER(title) LIKE LOWER(?)', "#{params[:l]}%" ).page(page).per(5)
     end
   end
 
