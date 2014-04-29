@@ -12,10 +12,10 @@
     <% @verses_from_xml.each.with_index(1) do |v, idx| %>
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Slide <%= idx %></h3>
+          <h3 class="panel-title">Slide <%= idx %>: <%= v['label'] %></h3>
         </div>
         <div class="panel-body">
-          <pre><%= v %></pre>
+          <pre><%= v['text'] %></pre>
         </div>
       </div>
     <% end %>

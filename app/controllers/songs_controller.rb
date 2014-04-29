@@ -73,13 +73,20 @@ class SongsController < ApplicationController
   def update
     respond_to do |format|
       # if a pro presenter 4 file is uploaded:
+      # NOTE/TODO: these parsing functions should be moved to a private/helper function
       if not params[:song][:pro4_file].nil?
         uploaded_io = params[:song][:pro4_file]
         doc = Nokogiri::XML( uploaded_io.read )
-        xml_verses = doc.xpath('RVPresentationDocument/slides/RVDisplaySlide/displayElements/RVTextElement')
+        xml_slides = doc.xpath('RVPresentationDocument/slides/RVDisplaySlide')
         @verses_from_xml = []
-        xml_verses.each { |e|
-          @verses_from_xml << rtf_to_plain( Base64.strict_decode64( e['RTFData'] ) )
+        xml_slides.each { |slide|
+          verse = {}
+          verse['label'] = slide['label']
+
+          slide_text = slide.xpath('displayElements/RVTextElement')
+          verse['text'] = rtf_to_plain( Base64.strict_decode64( slide_text[0]['RTFData'] ) )
+
+          @verses_from_xml << verse
         }
 
         format.html { render action: 'edit' }
