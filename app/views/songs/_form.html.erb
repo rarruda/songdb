@@ -9,6 +9,7 @@
       <%= f.input :composer %>
       <%= f.input :translator %>
       <%= f.input :copyright %>
+      <%= f.association :songbook, :include_blank => t('.select_songbook') %>
       <%= f.input :note %>
       <%= f.simple_fields_for :verses do |builder| %>
       <div class="verse sortable duplicatable_nested_form table table-hover table-bordered">

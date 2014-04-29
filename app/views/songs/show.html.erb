@@ -18,6 +18,8 @@
   <dd><%= @song.translator %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:copyright) %>:</strong></dt>
   <dd><%= @song.copyright %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:songbook) %>:</strong></dt>
+  <dd><% if ! @song.songbook.nil? %><%= @song.songbook.name %><% end %> &nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:note) %>:</strong></dt>
   <dd><%= @song.note %>&nbsp;</dd>
   <% @song.verses.each do |verse| %>

@@ -11,11 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317204215) do
+ActiveRecord::Schema.define(version: 20140429220844) do
 
   create_table "languages", force: true do |t|
     t.string   "name"
     t.string   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "songbooks", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,6 +37,7 @@ ActiveRecord::Schema.define(version: 20140317204215) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "language_id"
+    t.integer  "songbook_id"
   end
 
   create_table "verse_types", force: true do |t|
@@ -39,6 +46,7 @@ ActiveRecord::Schema.define(version: 20140317204215) do
     t.string   "shortcut_key"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "color_id",     default: 0
   end
 
   create_table "verses", force: true do |t|

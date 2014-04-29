@@ -12,7 +12,7 @@
 
 <div class="pagination">
   <ul>
-<% ( ("A".."Z").to_a + ["Å","Ø","Æ"] ).each do |l| %>
+<% ( ("A".."Z").to_a + ["Æ","Ø","Å"] ).each do |l| %>
     <li <% if ! params[:l].nil? and l == params[:l].upcase %>class="active"<% end %>><a href="/letter/<%= l.downcase %>"><%= l %></a></li>
 <% end %>
   </ul>

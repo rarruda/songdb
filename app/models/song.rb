@@ -1,6 +1,7 @@
 class Song < ActiveRecord::Base
 	has_many :verses, -> { order(position: :asc, id: :asc) }, :dependent => :destroy
 	belongs_to :language
+	belongs_to :songbook
 
 	validates :title, :presence => true
 	validates :language_id, :presence => true
