@@ -27,6 +27,8 @@ gem 'simple_form'
 gem 'twitter-bootstrap-rails'
 gem 'jquery-ui-rails', '~> 4.2.0'
 gem 'jquery-turbolinks'
+
+# Pagination:
 gem 'kaminari'
 
 # XML parsing:

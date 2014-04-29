@@ -5,12 +5,7 @@ class SongsController < ApplicationController
   helper_method :plain_to_rtf
 
   # GET /songs
-  # GET /songs.json
   def index
-    @songs = Song.all
-  end
-
-  def search
 
     if params[:page].nil? or params[:page].empty?
       page = 1
@@ -18,11 +13,12 @@ class SongsController < ApplicationController
       page = params[:page]
     end
 
-    if params[:q].nil?
-      #@songs = Song.all
+    if params[:q].nil? and params[:l].nil?
       @songs = Song.order(:id).page(page).per(5)
-    else
+    elsif params[:l].nil?
       @songs = Song.where( 'title LIKE ? OR subtitle LIKE ?', "%#{params[:q]}%", "%#{params[:q]}%" ).page(page).per(5)
+    elsif params[:q].nil?
+      @songs = Song.where( 'title LIKE ?', "#{params[:l]}%" ).page(page).per(5)
     end
   end
 

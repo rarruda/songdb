@@ -2,7 +2,23 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-<table class="table table-striped">
+
+<%= form_tag("/songs", method: "get", class: "form-search pull-right") do %>
+<div class="input-append">
+  <%= text_field_tag(:q, "#{params[:q]}", class: "span3 search-query") %>
+  <%= submit_tag("Search", class: "btn") %>
+</div>
+<% end %>
+
+<div class="pagination">
+  <ul>
+<% ( ("A".."Z").to_a + ["Å","Ø","Æ"] ).each do |l| %>
+    <li <% if ! params[:l].nil? and l == params[:l].upcase %>class="active"<% end %>><a href="/letter/<%= l.downcase %>"><%= l %></a></li>
+<% end %>
+  </ul>
+</div>
+
+<table class="table table-striped table-hover">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
@@ -11,8 +27,7 @@
       <th><%= model_class.human_attribute_name(:author) %></th>
       <th><%= model_class.human_attribute_name(:composer) %></th>
       <th><%= model_class.human_attribute_name(:translator) %></th>
-      <th><%= model_class.human_attribute_name(:copyright) %></th>
-      <th><%= model_class.human_attribute_name(:note) %></th>
+      <th><%= model_class.human_attribute_name(:language) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -26,22 +41,49 @@
         <td><%= song.author %></td>
         <td><%= song.composer %></td>
         <td><%= song.translator %></td>
-        <td><%= song.copyright %></td>
-        <td><%= song.note %></td>
+        <td><%= song.language.name %></td>
         <td><%=l song.created_at %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_song_path(song), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          <div class="btn-group">
+            <button type="button" class="btn btn-mini btn-info dropdown-toggle" data-toggle="dropdown">
+            <span class="sr-only">Action</span>
+            <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <!-- li role="presentation" class="dropdown-header">View</li -->
+              <li><%= link_to t('.show', :default => t("helpers.links.show")), song_path(song) %></li>
+              <li><%= link_to t('.slide', :default => t("helpers.links.slide")), slide_song_path( song ) %></li>
+              <li class="divider"></li>
+              <!-- li role="presentation" class="dropdown-header">Export</li -->
+              <li><%= link_to t('.xml', :default => t("helpers.links.xml")), slide_song_path( song, 'xml' ) %></li>
+              <li><%= link_to t('.pro4', :default => t("helpers.links.pro4")), slide_song_path( song, 'pro4' ) %></li>
+              <li class="divider"></li>
+              <!-- li role="presentation" class="dropdown-header">Edit/Delete</li -->
+              <li class="warning"> <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_song_path(song) %> </li>
+              <li> <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       song_path(song),
                       :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %> </li>
+            </ul>
+          </div>
+          <%#= link_to t('.show', :default => t("helpers.links.show")),
+                      song_path(song),
+                      :class => 'btn btn-mini btn-info' %>
+          <%#= link_to t('.slide', :default => t("helpers.links.slide")),
+                      slide_song_path( song ),
+                      :class => 'btn btn-mini btn-info' %>
+          <%#= link_to t('.pro4', :default => t("helpers.links.pro4")),
+                      slide_song_path( song, 'xml' ),
+                      :class => 'btn btn-mini btn-info' %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @songs %>
+
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_song_path,
