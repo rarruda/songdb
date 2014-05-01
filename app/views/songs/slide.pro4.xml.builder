@@ -1,9 +1,11 @@
 
 # TODO:
-# - ensure hotKeys are unique.
 # - colors (highlightColor) for diferent slide types
-# - somehow the slides are getting imported in reverse order, even if written in the correct order.
 # - Check for utf8 formatting, see: https://github.com/danthedeckie/OpenLP-To-ProPresenter5-Converter/blob/master/converter.py#L116
+
+# DONE:
+# - ensure hotKeys are unique.
+# - ensure that the slides are getting imported in correct order.
 
 rtf_magic_string_pre = '{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
 {\fonttbl\f0\fnil\fcharset0 FeSaCondStdDemi;}
@@ -24,13 +26,20 @@ xml.RVPresentationDocument( "height"=>"768", "width"=>"1024", "versionNumber"=>"
 	"artist"=>"", "author"=>"", "album"=>"", "CCLIDisplay"=>"0", "CCLIArtistCredits"=>"", "CCLISongTitle"=> @song.title, 
 	"CCLIPublisher"=>"", "CCLICopyrightInfo"=>"", "CCLILicenseNumber"=>"", ) {
   xml.slides( "containerClass" => "NSMutableArray") {
+    prev_shortcut_key = []
     @song.verses.each_with_index do |verse, idx|
+    cur_shortcut_key = verse.verse_type.shortcut_key
+    if prev_shortcut_key.include? cur_shortcut_key
+      cur_shortcut_key = ''
+    else
+      prev_shortcut_key << cur_shortcut_key
+    end
     xml.RVDisplaySlide(  "backgroundColor"=>"0 0 0 0", "enabled"=>"1",
         "highlightColor"=>"0 0 1 1", #highlight color, is the frame color, useful for us. should come from the verse_type.
-        "hotKey"=> verse.verse_type.shortcut_key, "label"=> verse.verse_type.name,
+        "hotKey"=> cur_shortcut_key, "label"=> verse.verse_type.name,
         "notes"=>"", "slideType"=>"1", "sort_index"=> idx, 
         "UUID"=> SecureRandom.uuid, "drawingBackgroundColor"=> "0",
-        "serialization-array-index"=> "0"){
+        "serialization-array-index"=> idx ){
       xml.cues("containerClass"=>"NSMutableArray")
       xml.displayElements("containerClass"=>"NSMutableArray"){
       	xml.RVTextElement( "displayDelay"=>"0", "displayName"=>"", "locked"=>"0", "persistent"=>"0",
