@@ -20,6 +20,14 @@
   <dd><%= @song.copyright %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:songbook) %>:</strong></dt>
   <dd><% if ! @song.songbook.nil? %><%= @song.songbook.name %><% end %> &nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:songbook_ref) %>:</strong></dt>
+  <dd><%= @song.songbook_ref %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:key_signature) %>:</strong></dt>
+  <dd><%= @song.key_signature %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:time_signature) %>:</strong></dt>
+  <dd><%= @song.time_signature %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:tempo) %>:</strong></dt>
+  <dd><%= @song.tempo %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:note) %>:</strong></dt>
   <dd><%= @song.note %>&nbsp;</dd>
   <% @song.verses.each do |verse| %>

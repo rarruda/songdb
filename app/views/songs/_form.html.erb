@@ -9,7 +9,11 @@
       <%= f.input :composer %>
       <%= f.input :translator %>
       <%= f.input :copyright %>
-      <%= f.association :songbook, :include_blank => t('.select_songbook') %>
+      <%= f.association :songbook, :include_blank => t('.none_unknown_other') %>
+      <%= f.input :songbook_ref,   :input_html => {:maxlength => 20 } %>
+      <%= f.input :key_signature,  :input_html => {:maxlength => 5 } %>
+      <%= f.input :time_signature, :input_html => {:maxlength => 5 } %>
+      <%= f.input :tempo,          :input_html => {:maxlength => 5 } %>
       <%= f.input :note %>
       <%= f.simple_fields_for :verses do |builder| %>
       <div class="verse sortable duplicatable_nested_form table table-hover table-bordered">

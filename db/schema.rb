@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140429220844) do
+ActiveRecord::Schema.define(version: 20140501042547) do
 
   create_table "languages", force: true do |t|
     t.string   "name"
@@ -38,6 +38,10 @@ ActiveRecord::Schema.define(version: 20140429220844) do
     t.datetime "updated_at"
     t.integer  "language_id"
     t.integer  "songbook_id"
+    t.string   "songbook_ref"
+    t.string   "key_signature"
+    t.string   "time_signature"
+    t.string   "tempo"
   end
 
   create_table "verse_types", force: true do |t|
